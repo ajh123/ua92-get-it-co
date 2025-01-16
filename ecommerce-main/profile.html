@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>E-Commerce | Your Profile</title>
+        <link rel="stylesheet" href="/assets/style.css"/>
+    </head>
+    <body>
+        <header>
+            <nav aria-label="Main navigation">
+                <a href="/">Home</a>
+                <a href="#">Products</a>
+                <div style="float: right;">
+                    Logged in as: Bilbo Baggins
+                    <a href="/logout">Logout</a>
+                    <a href="/profile.html">Profile</a>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="banner">
+                <h1 style="width: 30%;">Profile</h1>
+                <form style="float:right; margin-top: -50px;">
+                    <label for="search">Search:</label>
+                    <input id="search"/>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <hr/>
+            <article>
+                <h2>Cart:</h2>
+                <table>
+                    <th>Ammount</th>
+                    <th>Product</th>
+                    <th>Cost</th>
+                    <tr>
+                        <td>10</td>
+                        <td>Bananas</td>
+                        <td><code>$30</code></td>
+                        <td>
+                            <button>+</button>
+                            <button>-</button>
+                            <button>X</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Eggs</td>
+                        <td><code>$99</code></td>
+                        <td>
+                            <button>+</button>
+                            <button>-</button>
+                            <button>X</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Chicken</td>
+                        <td><code>$40</code></td>
+                        <td>
+                            <button>+</button>
+                            <button>-</button>
+                            <button>X</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Bread</td>
+                        <td><code>$60</code></td>
+                        <td>
+                            <button>+</button>
+                            <button>-</button>
+                            <button>X</button>
+                        </td>
+                    </tr>
+                    <tfoot>
+                        <tr>
+                            <th scope="row" colspan="3">Total items</th>
+                            <td><code>30</code></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="3">Total cost</th>
+                            <td><code>$229</code></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <a href="#">Proceed to Checkout</a>
+            </article>
+            <article>
+                <h2>Recent orders:</h2>
+                <table>
+                    <th>Order Number</th>
+                    <th>Date (DD-MM-YYYY)</th>
+                    <th>Cost (Total)</th>
+                    <th>Products</th>
+                    <tr>
+                        <td><code>12D20241</code></td>
+                        <td>12-12-2024</td>
+                        <td><code>$229</code></td>
+                        <td><ul>
+                            <li>10x Bananas (<code>$30</code>)</li>
+                            <li>10x Eggs (<code>$99</code>)</li>
+                            <li>4x Chicken (<code>$40</code>)</li>
+                            <li>6x Bread (<code>$60</code>)</li>                        
+                        </ul></td>
+                    </tr>
+                    <tr>
+                        <td><code>5D20241</code></td>
+                        <td>5-12-2024</td>
+                        <td><code>$229</code></td>
+                        <td><ul>
+                            <li>10x Bananas (<code>$30</code>)</li>
+                            <li>10x Eggs (<code>$99</code>)</li>
+                            <li>4x Chicken (<code>$40</code>)</li>
+                            <li>6x Bread (<code>$60</code>)</li>                        
+                        </ul></td>
+                    </tr>
+                </table>
+            </article>
+        </main>
+    </body>
+</html>

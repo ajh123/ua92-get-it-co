@@ -14,7 +14,7 @@ nav {
 }
 
 nav a {
-    text-decoration: none;
+    text-decoration: underline;
     color: white;
     margin-right: 10px;
 }
