@@ -6,6 +6,24 @@ html, body {
     font: 1em sans-serif;
 }
 
+button, input {
+    border-collapse: collapse;
+    border: 2px solid rgb(140 140 140);
+    border-radius: 0;
+}
+
+button {
+    background-color: rgb(228 240 245);
+}
+
+button:hover {
+    background-color: rgb(158, 183, 194);
+}
+
+button:active {
+    background-color: rgb(119, 162, 180);
+}
+
 nav {
     background-color: rgb(51, 98, 143);
     padding: 10px;
