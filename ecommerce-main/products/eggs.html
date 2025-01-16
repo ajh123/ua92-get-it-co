@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>E-Commerce | Eggs</title>
+        <link rel="stylesheet" href="/assets/style.css"/>
+    </head>
+    <body>
+        <header>
+            <nav aria-label="Main navigation">
+                <a href="/">Home</a>
+                <a href="/products">Products</a>
+                <div style="float: right;">
+                    Logged in as: Bilbo Baggins
+                    <a href="/logout">Logout</a>
+                    <a href="/profile.html">Profile</a>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div>
+                <h1 style="width: 30%;">Eggs</h1>
+                <form style="float:right; margin-top: -50px;">
+                    <label for="search">Search:</label>
+                    <input id="search"/>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <hr/>
+            <br>
+            <table>
+                <tr>
+                    <td><img src="/assets/images/eggs.jpg" width="200" height="200"></td>
+                    <td><ul>
+                        <li>Name: Eggs</li>
+                        <li>Price: $9.9</li>
+                    </ul></td>
+                </tr>
+            </table>
+
+            <form>
+                <label for="quanity">Quanity</label>
+                <input id="quanity" type="number"/>
+                <button >Add to cart</button>
+            </form>
+            <hr/>
+            <a href="/products/">All products</a>
+        </main>
+    </body>
+</html>
