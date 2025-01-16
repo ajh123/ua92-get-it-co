@@ -1,10 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>E-Commerce | Eggs</title>
-        <link rel="stylesheet" href="/assets/style.css"/>
+        <title>E-Commerce | {{product.name}}</title>
+        <link rel="stylesheet" href="{% static 'store/style.css' %}">
     </head>
     <body>
         <header>
@@ -14,13 +16,13 @@
                 <div style="float: right;">
                     Logged in as: Bilbo Baggins
                     <a href="/logout">Logout</a>
-                    <a href="/profile.html">Profile</a>
+                    <a href="/profile">Profile</a>
                 </div>
             </nav>
         </header>
         <main>
             <div>
-                <h1 style="width: 30%;">Eggs</h1>
+                <h1 style="width: 30%;">{{product.name}}</h1>
                 <form style="float:right; margin-top: -50px;">
                     <label for="search">Search:</label>
                     <input id="search"/>
@@ -28,14 +30,16 @@
                 </form>
             </div>
             <hr/>
-            <br>
             <table>
                 <tr>
-                    <td><img src="/assets/images/eggs.jpg" width="200" height="200"></td>
-                    <td><ul>
-                        <li>Name: Eggs</li>
-                        <li>Price: $9.9</li>
-                    </ul></td>
+                    <td><img src="/uploads/{{product.image}}" width="200" height="200"></td>
+                    <td>
+                        <ul>
+                        <li>Name: {{product.name}}</li>
+                        <li>Price: ${{product.price}}</li>
+                        <li>Description: {{product.description}}</li>
+                        </ul>
+                    </td>
                 </tr>
             </table>
 

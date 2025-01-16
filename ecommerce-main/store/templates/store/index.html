@@ -1,10 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>E-Commerce | Bananas</title>
-        <link rel="stylesheet" href="/assets/style.css"/>
+        <title>E-Commerce</title>
+        <link rel="stylesheet" href="{% static 'store/style.css' %}">
     </head>
     <body>
         <header>
@@ -14,13 +16,13 @@
                 <div style="float: right;">
                     Logged in as: Bilbo Baggins
                     <a href="/logout">Logout</a>
-                    <a href="/profile.html">Profile</a>
+                    <a href="/profile">Profile</a>
                 </div>
             </nav>
         </header>
         <main>
             <div>
-                <h1 style="width: 30%;">Bananas</h1>
+                <h1 style="width: 30%;">Home</h1>
                 <form style="float:right; margin-top: -50px;">
                     <label for="search">Search:</label>
                     <input id="search"/>
@@ -28,7 +30,6 @@
                 </form>
             </div>
             <hr/>
-            <a href="/products/">All products</a>
             <p>Welcome to the E-Commerce!</p>
         </main>
     </body>

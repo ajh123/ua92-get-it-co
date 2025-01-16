@@ -1,10 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>E-Commerce | Your Profile</title>
-        <link rel="stylesheet" href="/assets/style.css"/>
+        <link rel="stylesheet" href="{% static 'store/style.css' %}">
     </head>
     <body>
         <header>
@@ -14,7 +16,7 @@
                 <div style="float: right;">
                     Logged in as: Bilbo Baggins
                     <a href="/logout">Logout</a>
-                    <a href="/profile.html">Profile</a>
+                    <a href="/profile">Profile</a>
                 </div>
             </nav>
         </header>
