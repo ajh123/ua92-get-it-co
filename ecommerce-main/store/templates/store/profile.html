@@ -9,6 +9,7 @@
         <title>E-Commerce | Your Profile</title>
         <!-- Use the static tag to reference the store's style.css from the backend -->
         <link rel="stylesheet" href="{% static 'store/style.css' %}">
+        <script type="application/javascript" src="{% static 'store/cart.js' %}"></script>
     </head>
     <body>
         <header>
@@ -58,9 +59,9 @@
                         <td><a href="/products/bananas.html">Bananas</a></td>
                         <td><code>$30</code></td>
                         <td>
-                            <button>+</button>
-                            <button>-</button>
-                            <button>X</button>
+                            <button onclick="incItem('Bananas')">+</button>
+                            <button onclick="decItem('Bananas')">-</button>
+                            <button onclick="removeItem('Bananas')">X</button>
                         </td>
                     </tr>
                     <tr>
@@ -68,9 +69,9 @@
                         <td><a href="/products/eggs.html">Eggs</a></td>
                         <td><code>$99</code></td>
                         <td>
-                            <button>+</button>
-                            <button>-</button>
-                            <button>X</button>
+                            <button onclick="incItem('Eggs')">+</button>
+                            <button onclick="decItem('Eggs')">-</button>
+                            <button onclick="removeItem('Eggs')">X</button>
                         </td>
                     </tr>
                     <tr>
@@ -78,9 +79,9 @@
                         <td><a href="/products/Chicken.html">Chicken</a></td>
                         <td><code>$40</code></td>
                         <td>
-                            <button>+</button>
-                            <button>-</button>
-                            <button>X</button>
+                            <button onclick="incItem('Chicken')">+</button>
+                            <button onclick="decItem('Chicken')">-</button>
+                            <button onclick="removeItem('Chicken')">X</button>
                         </td>
                     </tr>
                     <tr>
@@ -88,9 +89,9 @@
                         <td><a href="/products/bread.html">Bread</a></td>
                         <td><code>$60</code></td>
                         <td>
-                            <button>+</button>
-                            <button>-</button>
-                            <button>X</button>
+                            <button onclick="incItem('Bread')">+</button>
+                            <button onclick="incItem('Bread')">-</button>
+                            <button onclick="removeItem('Bread')">X</button>
                         </td>
                     </tr>
                     <tfoot>
