@@ -23,11 +23,10 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Order {self.id}"
+        return f"Order {self.name}"
 
-    @property
     def total_price(self):
-        return sum(item.total_price for item in self.products.all())
+        return sum(item.product.price * item.quantity for item in self.orderitem_set.all())
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
