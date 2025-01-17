@@ -114,8 +114,8 @@
                     <th>Cost (Total)</th>
                     <th>Products</th>
                     {% if orders|length > 0 %}
+                    {% for order in orders %}
                     <tr>
-                        {% for order in orders %}
                         <td><code>{{order.name}}</code></td>
                         <td>{{order.created_at}}</td>
                         <td><code>${{order.total_price}}</code></td>
@@ -126,8 +126,8 @@
                                 {% endfor %}
                             </ul>
                         </td>
-                        {% endfor %}
                     </tr>
+                    {% endfor %}
                     {% else %}
                     <tr>
                         <td colspan="4">You have not made any orders</td>
