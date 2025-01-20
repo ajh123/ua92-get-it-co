@@ -10,13 +10,20 @@
         <!-- Use the static tag to reference the store's style.css from the backend -->
         <link rel="stylesheet" href="{% static 'store/style.css' %}">
         <script type="application/javascript" src="{% static 'store/cart.js' %}"></script>
+        <script>
+            // Get Django to construct a list of prices.
+            window.prices = {};
+            {% for product in products %} // This syntax is intentional, the backend (Django) will parse this before returning this HTML to the client.
+            prices["{{ product.name }}"] = Number("{{ product.price }}");
+            {% endfor %}
+        </script>
     </head>
     <body>
         <header>
             <nav aria-label="Main navigation">
                 <a href="/">Home</a>
                 <a href="/products">Products</a>
-                <!-- Check if the user is logged in, this condition will be parsed by the backend and the result will be given to the client. -->
+                <!-- Check if the user is logged in, this condition will be parsed by the backend (Django) and the result will be given to the client. -->
                 {% if user.is_authenticated %}
                 <div style="float: right;">
                     <!-- Check if the user has a first name -->
@@ -50,61 +57,7 @@
             <hr/>
             <article>
                 <h2>Cart:</h2>
-                <table>
-                    <th>Ammount</th>
-                    <th>Product</th>
-                    <th>Cost</th>
-                    <tr>
-                        <td>10</td>
-                        <td><a href="/products/bananas.html">Bananas</a></td>
-                        <td><code>$30</code></td>
-                        <td>
-                            <button onclick="incItem('Bananas')">+</button>
-                            <button onclick="decItem('Bananas')">-</button>
-                            <button onclick="removeItem('Bananas')">X</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td><a href="/products/eggs.html">Eggs</a></td>
-                        <td><code>$99</code></td>
-                        <td>
-                            <button onclick="incItem('Eggs')">+</button>
-                            <button onclick="decItem('Eggs')">-</button>
-                            <button onclick="removeItem('Eggs')">X</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><a href="/products/Chicken.html">Chicken</a></td>
-                        <td><code>$40</code></td>
-                        <td>
-                            <button onclick="incItem('Chicken')">+</button>
-                            <button onclick="decItem('Chicken')">-</button>
-                            <button onclick="removeItem('Chicken')">X</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td><a href="/products/bread.html">Bread</a></td>
-                        <td><code>$60</code></td>
-                        <td>
-                            <button onclick="incItem('Bread')">+</button>
-                            <button onclick="incItem('Bread')">-</button>
-                            <button onclick="removeItem('Bread')">X</button>
-                        </td>
-                    </tr>
-                    <tfoot>
-                        <tr>
-                            <th scope="row" colspan="3">Total items</th>
-                            <td><code>30</code></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan="3">Total cost</th>
-                            <td><code>$229</code></td>
-                        </tr>
-                    </tfoot>
-                </table>
+                <div id="cart"></div>
                 <a href="#">Proceed to Checkout</a>
             </article>
             <article>
@@ -137,5 +90,9 @@
                 </table>
             </article>
         </main>
+        <script>
+            // Call the renderCart function to display the cart
+            renderCart();
+        </script>
     </body>
 </html>

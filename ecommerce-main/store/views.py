@@ -33,8 +33,10 @@ def products_view(request, product_name):
 @login_required
 def profile(request):
     user: User = request.user
+    products = Product.objects.order_by("-name").filter()
     orders = Order.objects.order_by("-name").filter(user=user)
     context = {
+        "products": products,
         "orders": orders,
         "user": user
     }

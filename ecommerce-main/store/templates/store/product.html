@@ -16,7 +16,7 @@
             <nav aria-label="Main navigation">
                 <a href="/">Home</a>
                 <a href="/products">Products</a>
-                <!-- Check if the user is logged in, this condition will be parsed by the backend and the result will be given to the client. -->
+                <!-- Check if the user is logged in, this condition will be parsed by the backend (Django) and the result will be given to the client. -->
                 {% if user.is_authenticated %}
                 <div style="float: right;">
                     <!-- Check if the user has a first name -->
@@ -63,8 +63,8 @@
 
             <form>
                 <label for="quanity">Quanity</label>
-                <input id="quanity" type="number"/>
-                <button >Add to cart</button>
+                <input id="quanity" type="number" value="1" min="1"/>
+                <button onclick="subbmitItem('{{product.name}}')">Add to cart</button>
             </form>
             <hr/>
             <a href="/products/">All products</a>

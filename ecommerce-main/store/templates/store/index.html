@@ -16,7 +16,7 @@
             <nav aria-label="Main navigation">
                 <a href="/">Home</a>
                 <a href="/products">Products</a>
-                <!-- Check if the user is logged in, this condition will be parsed by the backend and the result will be given to the client. -->
+                <!-- Check if the user is logged in, this condition will be parsed by the backend (Django) and the result will be given to the client. -->
                 {% if user.is_authenticated %}
                 <div style="float: right;">
                     <!-- Check if the user has a first name -->
