@@ -6,7 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>E-Commerce | Products</title>
+        <title>Get It Co | Products</title>
         <!-- Use the static tag to reference the store's style.css from the backend -->
         <link rel="stylesheet" href="{% static 'store/style.css' %}">
         <script type="application/javascript" src="{% static 'store/cart.js' %}"></script>
@@ -50,7 +50,7 @@
             <hr/>
             <!-- Check if there are products available -->
             {% if products %}
-            <div class="grid">
+            <div class="products">
                 <!-- Create a loop to iterate all the products -->
                 {% for product in products %}
                 <!-- For every product create the following HTML element VVVV -->

@@ -13,56 +13,72 @@ main {
     margin-top: 10px;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
+.products {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.products > * {
+    margin: 5px;
+}
+
+.hero {
+    background-color: rgb(168, 189, 194);
+    padding: 30px;
+    margin: 0;
+    height: 150px;
+}
+
+.hero > .button {
+    padding: 10px;
 }
 
 /* This rule applies to buttons inputs and any element with the card class */
-button, input, .card {
+button, input, .card, .button {
     border-collapse: collapse; /* collapse is a specific style for table borders */
-    border: 2px solid rgb(140 140 140); /* this creates a gray border that is 2 pixels wide */
+    border: 0.5px solid rgb(140 140 140); /* this creates a gray border that is 0.5 pixels wide */
     border-radius: 0; /* this removes any round corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* This rule appiles to any button in the normal state */
-button {
+button, .button {
     /* We then use a light blue colour */
-    background-color: rgb(228 240 245);
+    background-color: rgb(212, 239, 245);
 }
 
 /* `:hover` is a pseudo-selector that only applies when in this case any button element is hovered by the mouse */
-button:hover {
+button:hover, .button:hover {
     /* When the button is hovered we want to use a slightly darker blue */
-    background-color: rgb(158, 183, 194);
+    background-color: rgb(168, 189, 194);
 }
 
 /* `:active` means that the button must be clicked to enable the rules */
-button:active {
+button:active, .button:active {
     /* When the button is clicked we want an even darker blue */
-    background-color: rgb(119, 162, 180);
+    background-color: rgb(130, 147, 151);
 }
 
 /* This rule only applies to any `nav` element */
 nav {
-    background-color: rgb(51, 98, 143);
+    background-color: rgb(212, 239, 245);
     padding: 10px;
-    color: white;
-    width: calc(100% - 20px);
+    color: rgb(0, 0, 0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 0.5px solid rgb(140 140 140); /* this creates a gray border that is 0.5 pixels wide */
 }
 
 /* This rule only applies to any `a` (link) elements in a `nav` element */
 nav a {
     text-decoration: underline;
-    color: white;
+    color: rgb(0, 0, 0);
     margin-right: 10px;
 }
 
 /* This rule only applies to any `a` (link) elements that the mouse is hovering in a `nav` element */
 nav a:hover {
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.781);
+    color: rgba(39, 39, 39, 0.781);
 }
 
 /*
@@ -73,7 +89,7 @@ Comments add by me, some colours tweeked.
 /* Table code from Mozilla */
 table {
     border-collapse: collapse;
-    border: 2px solid rgb(140 140 140);
+    border: 0.5px solid rgb(140 140 140); /* this creates a gray border that is 0.5 pixels wide */
     font-family: sans-serif;
     font-size: 0.8rem;
     letter-spacing: 1px;
@@ -87,7 +103,7 @@ caption {
 
 thead,
 tfoot {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(168, 189, 194);
 }
 
 /* This rule creats a 1px wide gray border with some padding to have better seperation */
@@ -103,7 +119,7 @@ td:last-of-type {
 
 /* The psuedo selector of `tr:nth-of-type` will iterate through all `tr` elements and only apply a white colour if the row is even */
 tbody > tr:nth-of-type(even) {
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(212, 239, 245, 0.932);
 }
 
 /* This rule will right align any table headers in the table footer */
