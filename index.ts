@@ -1,3 +1,5 @@
+import ejs from 'ejs';
+
 const server = Bun.serve({
     async fetch(req) {
         const url = new URL(req.url);
@@ -8,6 +10,12 @@ const server = Bun.serve({
             return new Response(Bun.file(`./frontend/${path}`));
         }
 
+        const data = {
+            user: {
+                is_authenticated: false,
+            }
+        };
+
         // Serve HTML files manually to prevent Bun's bundling interference
         const routes: Record<string, string> = {
             "/": "./frontend/index.html",
@@ -17,7 +25,11 @@ const server = Bun.serve({
         };
 
         if (routes[path]) {
-            return new Response(Bun.file(routes[path]), {
+            // Read the EJS template and render it with the data
+            const templatePath = routes[path];
+            const html = await ejs.renderFile(templatePath, data);
+
+            return new Response(html, {
                 headers: { "Content-Type": "text/html" },
             });
         }
