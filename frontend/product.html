@@ -1,15 +1,12 @@
-<!-- Load the static tag to reference static files on the backend -->
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Get It Co</title>
+        <title>Get It Co | {{product.name}}</title>
         <!-- Use the static tag to reference the store's style.css from the backend -->
-        <link rel="stylesheet" href="{% static 'store/style.css' %}">
-        <script type="application/javascript" src="{% static 'store/cart.js' %}"></script>
+        <link rel="stylesheet" href="assets/style.css">
+        <script type="application/javascript" src="assets/cart.js"></script>
     </head>
     <body>
         <header>
@@ -38,14 +35,9 @@
                 {% endif %}
             </nav>
         </header>
-        <section class="hero">
-            <span style="font: 2em sans-serif;">Get It Co</span>
-            <p>Welcome to the Get It Co! We are the best supermarket in the city of Samchezter.</p>
-            <a class="button" href="/products">View our products</a>
-        </section>
         <main>
             <div>
-                <h1 style="width: 30%;">Home</h1>
+                <h1 style="width: 30%;">{{product.name}}</h1> <!-- Retreive the name of the product -->
                 <form style="float:right; margin-top: -50px;">
                     <label for="search">Search:</label>
                     <input id="search"/>
@@ -53,16 +45,26 @@
                 </form>
             </div>
             <hr/>
-            <section>
-                <div style="float: left;">
-                    <h2>Location</h2>
-                    <p>We are located right in the heart of Samchezter.</p>
-                </div>
-                <div style="float: right;">
-                    <iframe width="100%" height="200px" src="https://maps.minersonline.uk"></iframe>
-                </div>
-            </section>
+            <table>
+                <tr>
+                    <td><img src="/uploads/{{product.image}}" width="200" height="200"></td> <!-- Create an image by using the product's image -->
+                    <td>
+                        <ul>
+                        <li>Name: {{product.name}}</li> <!-- Retreive the name of the product -->
+                        <li>Price: ${{product.price}}</li> <!-- Retreive the price of the product -->
+                        <li>Description: {{product.description}}</li> <!-- Retreive the description of the product -->
+                        </ul>
+                    </td>
+                </tr>
+            </table>
 
+            <form>
+                <label for="quanity">Quanity</label>
+                <input id="quanity" type="number" value="1" min="1"/>
+                <button onclick="subbmitItem('{{product.name}}')">Add to cart</button>
+            </form>
+            <hr/>
+            <a href="/products/">All products</a>
         </main>
     </body>
 </html>

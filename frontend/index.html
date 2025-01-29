@@ -1,15 +1,12 @@
-<!-- Load the static tag to reference static files on the backend -->
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Get It Co | Products</title>
+        <title>Get It Co</title>
         <!-- Use the static tag to reference the store's style.css from the backend -->
-        <link rel="stylesheet" href="{% static 'store/style.css' %}">
-        <script type="application/javascript" src="{% static 'store/cart.js' %}"></script>
+        <link rel="stylesheet" href="assets/style.css">
+        <script type="application/javascript" src="assets/cart.js"></script>
     </head>
     <body>
         <header>
@@ -38,9 +35,14 @@
                 {% endif %}
             </nav>
         </header>
+        <section class="hero">
+            <span style="font: 2em sans-serif;">Get It Co</span>
+            <p>Welcome to the Get It Co! We are the best supermarket in the city of Samchezter.</p>
+            <a class="button" href="/products">View our products</a>
+        </section>
         <main>
             <div>
-                <h1 style="width: 30%;">Products</h1>
+                <h1 style="width: 30%;">Home</h1>
                 <form style="float:right; margin-top: -50px;">
                     <label for="search">Search:</label>
                     <input id="search"/>
@@ -48,31 +50,16 @@
                 </form>
             </div>
             <hr/>
-            <!-- Check if there are products available -->
-            {% if products %}
-            <div class="products">
-                <!-- Create a loop to iterate all the products -->
-                {% for product in products %}
-                <!-- For every product create the following HTML element VVVV -->
-                <a href="/products/{{product.name}}" class="card" style="align-items: center; text-align: center; width: 100px;"> <!-- Create a link element with the product's name -->
-                    <img src="/uploads/{{product.image}}" width="100%" height="100"> <!-- Create an image and give it the source of the product's image -->
-                    <table style="border-bottom: none; width: 100%;">
-                        <tbody>
-                            <tr>
-                                <th scope="row" colspan="2">{{product.name}}</th> <!-- Retreive the product name -->
-                            </tr>
-                            <tr>
-                                <th scope="row" colspan="2">${{product.price}}</th> <!-- Retreive the product description -->
-                            </tr>
-                        </tbody>
-                    </table>
-                </a>
-                {% endfor %}
-            </div>
-            {% else %}
-            <!-- If there are no products display a message to the user -->
-            <p>No products are available.</p>
-            {% endif %}
+            <section>
+                <div style="float: left;">
+                    <h2>Location</h2>
+                    <p>We are located right in the heart of Samchezter.</p>
+                </div>
+                <div style="float: right;">
+                    <iframe width="100%" height="200px" src="https://maps.minersonline.uk"></iframe>
+                </div>
+            </section>
+
         </main>
     </body>
 </html>
