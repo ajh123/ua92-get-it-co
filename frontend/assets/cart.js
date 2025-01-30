@@ -1,10 +1,10 @@
 /**
- * Sets the item in the cart to the chosen quanity.
+ * Sets the item in the cart to the chosen quantity.
  * 
  * @param {string} name The name of the item.
  * @param {number} quantity The chosen quantity.
  */
-function setItem(name, quantity) {
+export function setItem(name, quantity) {
     // Fetch the cart from the browser's local storage,
     // then convert it into a JavaScript object using JSON.
     let cart = JSON.parse(localStorage.getItem("cart"));
@@ -14,7 +14,7 @@ function setItem(name, quantity) {
         cart = {}; // So we make a new one
     }
 
-    // Set the quanity of the by assinging by indexing the cart with "name"
+    // Set the quantity of the by assigning by indexing the cart with "name"
     cart[name] = quantity;
 
     // Convert the updated cart object back to a JSON string and store it in the
@@ -24,12 +24,12 @@ function setItem(name, quantity) {
 
 
 /**
- * Returns the quanity of a given item in the cart.
+ * Returns the quantity of a given item in the cart.
  * 
  * @param {string} name The name of the item.
  * @returns {number|undefined} The item's quantity.
  */
-function getItem(name) {
+export function getItem(name) {
     /** @type {Object|undefined} */
     let cart = JSON.parse(localStorage.getItem("cart"));
 
@@ -38,8 +38,8 @@ function getItem(name) {
         cart = {}; // So we make a new one
     }
 
-    // Then we index the cart object with "name" to fect the current value,
-    // this may return `undefined` if the cart does not contian the item.
+    // Then we index the cart object with "name" to fetch the current value,
+    // this may return `undefined` if the cart does not contain the item.
     return cart[name];
 }
 
@@ -48,7 +48,7 @@ function getItem(name) {
  * 
  * @param {string} name The name of the item.
  */
-function removeItem(name) {
+export function removeItem(name) {
     // Fetch the cart from the browser's local storage,
     // then convert it into a JavaScript object using JSON.
     let cart = JSON.parse(localStorage.getItem("cart"));
@@ -67,41 +67,41 @@ function removeItem(name) {
 }
 
 /**
- * Increments the quanity of an item by 1.
- * If the item does not exist in the cart its quanity will be set to 1.
+ * Increments the quantity of an item by 1.
+ * If the item does not exist in the cart its quantity will be set to 1.
  * 
  * @param {string} name The name of the item.
  */
-function incItem(name) {
+export function incItem(name) {
     // We fetch the item using our `getItem` method
     let quantity = getItem(name);
-    // If the quanity is `undefined` then we set the quanity to 0
+    // If the quantity is `undefined` then we set the quantity to 0
     if (quantity == undefined) {
         quantity = 0;
     }
-    // Then increment the quanity
+    // Then increment the quantity
     quantity += 1;
-    // Then use `setItem` to update the item's quanity in the cart
+    // Then use `setItem` to update the item's quantity in the cart
     setItem(name, quantity);
 }
 
 /**
- * Decrements the quanity of an item by 1.
- * This function will ensure that the quanity cannot be less then 1.
- * Also, if the item does not exist, the quanity will be set to 1.
+ * Decrements the quantity of an item by 1.
+ * This function will ensure that the quantity cannot be less then 1.
+ * Also, if the item does not exist, the quantity will be set to 1.
  * 
  * @param {string} name The name of the item.
  */
-function decItem(name) {
+export function decItem(name) {
      // We fetch the item using our `getItem` method
     let quantity = getItem(name);
-    // If the quanity is `undefined` then we set the quanity to 1
+    // If the quantity is `undefined` then we set the quantity to 1
     if (quantity == undefined) {
         quantity = 1;
     }
     
     quantity = Math.max(1, quantity - 1);
-    // Then use `setItem` to update the item's quanity in the cart
+    // Then use `setItem` to update the item's quantity in the cart
     setItem(name, quantity);
 }
 
@@ -111,9 +111,9 @@ function decItem(name) {
  * 
  * This function makes a new cart instance if one does not exist.
  * 
- * @returns {object} An object whos keys represent item names and values represent the quanity.
+ * @returns {object} An object whos keys represent item names and values represent the quantity.
  */
-function getItems() {
+export function getItems() {
     /** @type {Object|undefined} */
     // Fetch the cart from the local storage again and convert it to an object with JSON
     let cart = JSON.parse(localStorage.getItem("cart"));
@@ -132,23 +132,23 @@ function getItems() {
 /**
  * Updates an element with the ID `"cart"` to contain a table which represents all items in the cart.
  */
-function renderCart() {
+export async function renderCart() {
     let cart = getItems(); // Get the all items in the cart
 
     // Construct a string to represent the HTML for a table, first start with the header.
-    // As we can see there is the excat HTML definition for a table with each element inside
+    // As we can see there is the exact HTML definition for a table with each element inside
     // as expected.
     let table = `
-        <table border='1'>
+        <table class="table table-striped table-hover table-bordered">
             <thead>
                 <tr>
-                    <th>Amount</th>
-                    <th>Product</th>
-                    <th>Cost</th>
-                    <th>Actions</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider table-bordered">
     `;
 
     // Initialise all totals to 0
@@ -156,26 +156,27 @@ function renderCart() {
     let totalCost = 0;
 
     // Iterate through all items in the cart
-    for (let item in cart) {
-        let quantity = cart[item]; // Get the item quanity
-        let cost = getItemCost(item); // Get item price
+    for (let id in cart) {
+        let quantity = cart[id]; // Get the item quantity
+        let item = await getItemProperties(id); // Get item
         totalItems += quantity; // Append to to total
-        totalCost += cost * quantity; // ^^^
+
+        totalCost += item.price * quantity; // ^^^
 
         // Append a new row to the table displaying item properties
-        // A table row in HTML is a `<tr>` and each colloumn in the row is a `<td>`
-        // Then by using the syntax `${quantity}` we can insert the varible content in the HTML string.
+        // A table row in HTML is a `<tr>` and each column in the row is a `<td>`
+        // Then by using the syntax `${quantity}` we can insert the variable content in the HTML string.
         //
         // We append to the existing table string since we want one object to represent the whole table.
         table += `
             <tr>
                 <td>${quantity}</td>
-                <td><a href="/products/${item}">${item}</a></td>
-                <td><code>$${cost * quantity}</code></td>
+                <td><a href="/products/${id}">${item.name}</a></td>
+                <td><code>$${item.price * quantity}</code></td>
                 <td>
-                    <button onclick="incItem('${item}'); renderCart();">+</button>
-                    <button onclick="decItem('${item}'); renderCart();">-</button>
-                    <button onclick="removeItem('${item}'); renderCart();">X</button>
+                    <button class="btn btn-secondary" onclick="incItem('${id}'); renderCart();">+</button>
+                    <button class="btn btn-secondary" onclick="decItem('${id}'); renderCart();">-</button>
+                    <button class="btn btn-danger" onclick="removeItem('${id}'); renderCart();">X</button>
                 </td>
             </tr>
         `;
@@ -184,7 +185,7 @@ function renderCart() {
     // Finish the table by appending HTML to close the table and include a footer with totals
     table += `
             </tbody>
-            <tfoot>
+            <tfoot class="table-group-divider table-bordered">
                 <tr>
                     <th scope="row" colspan="3">Total items</th>
                     <td><code>${totalItems}</code></td>
@@ -197,47 +198,60 @@ function renderCart() {
         </table>
     `;
 
+    if (Object.keys(cart).length == 0) {
+        table = "<p>Your cart is empty!</p>";
+    }
+
     // Overwrite an HTML element with ID of "cart" to contain the new table
     document.getElementById("cart").innerHTML = table;
 }
 
 /**
- * Fetchs and item price frmo, the backend whos keys represent 
+ * Fetches and item price from, the backend who's keys represent 
  * item names and values represent all item properties.
  * 
- * @param {string} item The name of the item.
- * @returns {number} Returns the item's price, or 0 if one does not exist.
+ * @param {string} item The name of the item id.
+ * @returns {Promise<object|undefined>} Returns the item's properties.
  */
-async function getItemCost(item) {
-    const items = await fetch("/api/v1/getProducts");
-
-    return items[item].price || 0;
+export async function getItemProperties(item) {
+    const items = await (await fetch("/api/v1/getProducts")).json();
+    return items[item];
 }
 
 /**
- * Takes a quanity from an input element with id `"quanity"` and sets an item using it.
- * This function will alert the user if the quanity is less then 1 and will alert when the
+ * Takes a quantity from an input element with id `"quantity"` and sets an item using it.
+ * This function will alert the user if the quantity is less then 1 and will alert when the
  * item is added to the cart.
  * 
  * @param {string} item The name of an item.
  */
-function subbmitItem(item) {
-    // This looks for a HTML element with the ID of `quanity`, this only exists in `product.html` and in that
-    // file there is a form input with the ID of `quanity`. 
-    // When the user subbmits that form, this function is called and this line will fetch the value of the input.
-    const quantity = Number(document.getElementById("quanity").value);
+export function submitItem(item) {
+    // This looks for a HTML element with the ID of `quantity`, this only exists in `product.html` and in that
+    // file there is a form input with the ID of `quantity`. 
+    // When the user submits that form, this function is called and this line will fetch the value of the input.
+    const quantity = Number(document.getElementById("quantity").value);
 
-    // We check if the quanity is less then 1, at runtime this is impossible as the form input as a minimun of 1, but
+    // We check if the quantity is less then 1, at runtime this is impossible as the form input as a minimum of 1, but
     // an attacker could inject code into the browser console and submit less then 1.
     if (quantity < 1) {
         // We use `alert` to show a dialog to the user.
-        alert("Item quanity must be less than 1!")
+        alert("Item quantity must be less than 1!")
     } else {
         // We fetch the current item and or if the result is undefined we set it to 1
         const currQuant = getItem(item) || 1;
         // We then put the item into the cart
         setItem(item, currQuant + quantity);
-        // And alert to the user this operation was successfull
+        // And alert to the user this operation was successful
         alert(`${quantity} X ${item} added to cart.`)
     }
 }
+
+window.setItem = setItem;
+window.getItem = getItem;
+window.removeItem = removeItem;
+window.incItem = incItem;
+window.decItem = decItem;
+window.getItems = getItems;
+window.renderCart = renderCart;
+window.getItemProperties = getItemProperties;
+window.submitItem = submitItem;
