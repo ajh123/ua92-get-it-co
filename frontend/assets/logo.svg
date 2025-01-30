@@ -1,0 +1,12 @@
+<svg width="500" height="200" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <filter id="svg_2_blur">
+   <feGaussianBlur in="SourceGraphic" stdDeviation="0"/>
+  </filter>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <text transform="matrix(1 0 0 1 0 0)" font-weight="bold" fill="#619E73" stroke-width="0" x="14.73438" y="120" id="svg_2" font-size="120" font-family="'Archivo'" text-anchor="start" xml:space="preserve" filter="url(#svg_2_blur)" stroke="#000">Get It Co</text>
+  <text transform="matrix(1 0 0 1 0 0)" font-weight="bold" fill="#619E73" stroke-width="0" x="59.3401" y="179" id="svg_1" font-size="30" font-family="'Archivo'" text-anchor="start" xml:space="preserve" filter="url(#svg_2_blur)" stroke="#000">Your new online supermarket</text>
+ </g>
+</svg>

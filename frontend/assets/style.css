@@ -69,7 +69,7 @@ nav {
 }
 
 /* This rule only applies to any `a` (link) elements in a `nav` element */
-nav a {
+nav a, nav img {
     text-decoration: underline;
     color: rgb(0, 0, 0);
     margin-right: 10px;
