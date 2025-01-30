@@ -46,30 +46,30 @@
             </div>
             <hr/>
             <!-- Check if there are products available -->
-            {% if products %}
-            <div class="products">
-                <!-- Create a loop to iterate all the products -->
-                {% for product in products %}
-                <!-- For every product create the following HTML element VVVV -->
-                <a href="/products/{{product.name}}" class="card" style="align-items: center; text-align: center; width: 100px;"> <!-- Create a link element with the product's name -->
-                    <img src="/uploads/{{product.image}}" width="100%" height="100"> <!-- Create an image and give it the source of the product's image -->
-                    <table style="border-bottom: none; width: 100%;">
-                        <tbody>
-                            <tr>
-                                <th scope="row" colspan="2">{{product.name}}</th> <!-- Retreive the product name -->
-                            </tr>
-                            <tr>
-                                <th scope="row" colspan="2">${{product.price}}</th> <!-- Retreive the product description -->
-                            </tr>
-                        </tbody>
-                    </table>
-                </a>
-                {% endfor %}
-            </div>
-            {% else %}
-            <!-- If there are no products display a message to the user -->
-            <p>No products are available.</p>
-            {% endif %}
+            <% if (products) { %>
+                <div class="products">
+                    <!-- Create a loop to iterate all the products -->
+                    <% for (const product in products) { %>
+                        <!-- For every product create the following HTML element VVVV -->
+                        <a href="/products/<%= product %>" class="card" style="align-items: center; text-align: center; width: 100px;"> <!-- Create a link element with the product's name -->
+                            <img src="<%= products[product].image %>" width="100%" height="100"> <!-- Create an image and give it the source of the product's image -->
+                            <table style="border-bottom: none; width: 100%;">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" colspan="2"><%= products[product].name %></th> <!-- Retreive the product name -->
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" colspan="2">$<%= products[product].price %></th> <!-- Retreive the product description -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </a>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <!-- If there are no products display a message to the user -->
+                <p>No products are available.</p>
+            <% } %>
         </main>
     </body>
 </html>

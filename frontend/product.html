@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Get It Co | {{product.name}}</title>
+        <title>Get It Co | <%= product.name %></title>
         <!-- Use the static tag to reference the store's style.css from the backend -->
         <link rel="stylesheet" href="/assets/style.css">
         <script type="application/javascript" src="/assets/cart.js"></script>
@@ -37,7 +37,7 @@
         </header>
         <main>
             <div>
-                <h1 style="width: 30%;">{{product.name}}</h1> <!-- Retreive the name of the product -->
+                <h1 style="width: 30%;"><%= product.name %></h1> <!-- Retreive the name of the product -->
                 <form style="float:right; margin-top: -50px;">
                     <label for="search">Search:</label>
                     <input id="search"/>
@@ -47,12 +47,12 @@
             <hr/>
             <table>
                 <tr>
-                    <td><img src="/uploads/{{product.image}}" width="200" height="200"></td> <!-- Create an image by using the product's image -->
+                    <td><img src="<%= product.image %>" width="200" height="200"></td> <!-- Create an image by using the product's image -->
                     <td>
                         <ul>
-                        <li>Name: {{product.name}}</li> <!-- Retreive the name of the product -->
-                        <li>Price: ${{product.price}}</li> <!-- Retreive the price of the product -->
-                        <li>Description: {{product.description}}</li> <!-- Retreive the description of the product -->
+                        <li>Name: <%= product.name %></li> <!-- Retreive the name of the product -->
+                        <li>Price: $<%= product.price %></li> <!-- Retreive the price of the product -->
+                        <li>Description: <%= product.description %></li> <!-- Retreive the description of the product -->
                         </ul>
                     </td>
                 </tr>
@@ -61,7 +61,7 @@
             <form>
                 <label for="quanity">Quanity</label>
                 <input id="quanity" type="number" value="1" min="1"/>
-                <button onclick="subbmitItem('{{product.name}}')">Add to cart</button>
+                <button onclick="subbmitItem('<%=product_id%>')">Add to cart</button>
             </form>
             <hr/>
             <a href="/products/">All products</a>
