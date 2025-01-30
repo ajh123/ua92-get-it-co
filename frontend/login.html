@@ -24,7 +24,8 @@
                     <!-- If the user is not logged in, give them the login button -->
                     <div style="float: right;">
                         <a href="/login">Login</a>
-                    </div>              
+                        <a href="/signup">Sign Up</a>
+                    </div>
                 <% } %>
             </nav>
         </header>
@@ -36,11 +37,11 @@
             <article>
                 <form method="post" action="/login">
                     <label for="email">Email:</label>
-                    <input name="email" type="email"/>
+                    <input name="email" type="email" required/>
                     <br/>
                     <br/>
                     <label for="password">Password:</label>
-                    <input name="password" type="password"/>
+                    <input name="password" type="password" required/>
                     <br/>
                     <br/>
                     <button type="submit">Submit</button>
