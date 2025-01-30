@@ -1,4 +1,21 @@
 import { routes } from "./views";
+import { match } from 'path-to-regexp';
+
+const findRoute = (path: string) => {
+    for (const route in routes) {
+        const matcher = match(route, { decode: decodeURIComponent });
+        const matched = matcher(path);
+        if (matched) {
+            return { view: routes[route], params: matched.params };
+        }
+    }
+    return null;
+};
+
+const isRecordStringString = (obj: any): obj is Record<string, string> => {
+    if (typeof obj !== 'object' || obj === null) return false;
+    return Object.values(obj).every(value => typeof value === 'string');
+};
 
 const server = Bun.serve({
     async fetch(req) { // Listen for any request from the browser
@@ -12,10 +29,14 @@ const server = Bun.serve({
 
         // If the route is not a static file that mean it must be a view
         // so we must check if there is a view function assigned.
-        if (routes[path]) {
-            // If there is a view function assigned we should execute that and return the reponse
-            const view = routes[path];
-            return view(req);
+        const result = findRoute(path);
+        if (result) {
+            const { view, params } = result;
+            if (params && isRecordStringString(params)) {
+                return view(req, params);
+            } else {
+                return view(req);
+            }
         }
 
         // Otherwise return a 404 not found to the user
