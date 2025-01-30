@@ -1,10 +1,13 @@
-import { render, type ViewArgs, type Route } from "./utils";
+import { render, render_json } from "./utils";
+import { type ViewArgs, type Route } from "./utils";
 
 import { getProductById, getProducts } from "./storage";
 
 const user = {
     is_authenticated: false,
 }
+
+// HTML VIEWS
 
 export function home(req: Request) {
     const data = {
@@ -46,7 +49,18 @@ export function profile(req: Request) {
     return render("./frontend/profile.html", data);
 }
 
+// JSON APIs
+
+export function products_api(req: Request) {
+    const products = getProducts();
+
+    return render_json(products);
+}
+
+// Route definitions
+
 export const routes: Record<string, Route>  = {
+    "/api/v1/getProducts": products_api,
     "/": home,
     "/products": product_index,
     "/products/:id": product,

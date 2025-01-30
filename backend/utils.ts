@@ -8,6 +8,12 @@ export async function render(path: string, data: object) {
     });
 }
 
+export async function render_json(data: object) {
+    return new Response(JSON.stringify(data), {
+        headers: { "Content-Type": "application/json" },
+    });
+}
+
 export type ViewArgs = Record<string, string>;
 
 export type Route = (req: Request, params?: ViewArgs) => Promise<Response>;

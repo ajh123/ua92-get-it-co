@@ -202,18 +202,16 @@ function renderCart() {
 }
 
 /**
- * Fetchs and item price fro, a object located at `window.prices` whos keys represent 
- * item names and values represent prices.
+ * Fetchs and item price frmo, the backend whos keys represent 
+ * item names and values represent all item properties.
  * 
  * @param {string} item The name of the item.
  * @returns {number} Returns the item's price, or 0 if one does not exist.
  */
-function getItemCost(item) {
-    // This code assumes that `window.prices` is a JavaScript object that already exists in global memeory,
-    // which in `profile.html` this global object is created.
-    // Using the OR operation (`||`) will ensure that if `window.prices` is undefined that a value is stil
-    // returned, in this case 0.
-    return window.prices[item] || 0;
+async function getItemCost(item) {
+    const items = await fetch("/api/v1/getProducts");
+
+    return items[item].price || 0;
 }
 
 /**
