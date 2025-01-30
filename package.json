@@ -1,9 +1,9 @@
 {
   "name": "get_it_co",
-  "module": "index.ts",
+  "module": "backend/index.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun run --watch index.ts"
+    "dev": "bun run --watch backend/index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
