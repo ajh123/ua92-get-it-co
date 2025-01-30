@@ -8,7 +8,7 @@ export async function render(path: string, data: object) {
     });
 }
 
-export async function render_json(data: object) {
+export async function render_json(data: object | string) {
     return new Response(JSON.stringify(data), {
         headers: { "Content-Type": "application/json" },
     });

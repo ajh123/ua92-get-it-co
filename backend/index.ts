@@ -33,9 +33,9 @@ const server = Bun.serve({
         if (result) {
             const { view, params } = result;
             if (params && isRecordStringString(params)) {
-                return view(req, params);
+                return await view(req, params);
             } else {
-                return view(req);
+                return await view(req);
             }
         }
 

@@ -7,13 +7,6 @@
         <!-- Use the static tag to reference the store's style.css from the backend -->
         <link rel="stylesheet" href="/assets/style.css">
         <script type="application/javascript" src="/assets/cart.js"></script>
-        <script>
-            // Get Django to construct a list of prices.
-            window.prices = {};
-            {% for product in products %} // This syntax is intentional, the backend (Django) will parse this before returning this HTML to the client.
-            prices["{{ product.name }}"] = Number("{{ product.price }}");
-            {% endfor %}
-        </script>
     </head>
     <body>
         <header>
@@ -21,16 +14,9 @@
                 <a href="/">Home</a>
                 <a href="/products">Products</a>
                 <!-- Check if the user is logged in, this condition will be parsed by the backend (Django) and the result will be given to the client. -->
-                <% if ( user.is_authenticated ) { %>
+                <% if ( is_authenticated ) { %>
                     <div style="float: right;">
-                        <!-- Check if the user has a first name -->
-                        <% if ( user.first_name ) { %>
-                            <!-- If true render their name -->
-                            Logged in as: <%= user.first_name %> <%= user.last_name %>
-                        <% } else { %>
-                            <!-- Otherwise just render their user name -->
-                            Logged in as: <%= user.username %>
-                        <% } %>
+                        Logged in as: <%= user.name %>
                         <a href="/logout">Logout</a>
                         <a href="/profile">Profile</a>
                     </div>
@@ -64,26 +50,26 @@
                     <th>Date</th>
                     <th>Cost (Total)</th>
                     <th>Products</th>
-                    {% if orders|length > 0 %}
-                    {% for order in orders %}
-                    <tr>
-                        <td><code>{{order.name}}</code></td>
-                        <td>{{order.created_at}}</td>
-                        <td><code>${{order.total_price}}</code></td>
-                        <td>
-                            <ul>
-                                {% for item in order.orderitem_set.all %}
-                                <li>{{ item.quantity }} x <a href="/products/{{item.product.name}}">{{item.product.name}}</a> - ${{ item.total_price }}</li>
-                                {% endfor %}
-                            </ul>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    {% else %}
+                    <% if (orders.length > 0) { %>
+                        <% for (order in orders) %>
+                        <tr>
+                            <td><code><%=order.name%></code></td>
+                            <td><%=order.created_at%></td>
+                            <td><code>$<%=order.total_price%></code></td>
+                            <td>
+                                <ul>
+                                    <% for (item in order.orderitem_set.all) %>
+                                    <li><%= item.quantity %> x <a href="/products/<%=item.product.name%>"><%=item.product.name%></a> - $<%= item.total_price %></li>
+                                    <% } %>
+                                </ul>
+                            </td>
+                        </tr>
+                        <% } %>
+                    <% } else { %>
                     <tr>
                         <td colspan="4">You have not made any orders</td>
                     </tr>
-                    {% endif %}
+                    <% } %>
                 </table>
             </article>
         </main>
