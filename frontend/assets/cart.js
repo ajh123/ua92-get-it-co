@@ -238,7 +238,7 @@ export function submitItem(item) {
         alert("Item quantity must be less than 1!")
     } else {
         // We fetch the current item and or if the result is undefined we set it to 1
-        const currQuant = getItem(item) || 1;
+        const currQuant = getItem(item) || 0;
         // We then put the item into the cart
         setItem(item, currQuant + quantity);
         // And alert to the user this operation was successful
