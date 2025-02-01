@@ -1,12 +1,14 @@
 ---
-interface Props {
-    user?: {
-        name: string;
-    };
-}
+// This code is ran on the backend
+let user = undefined;
 
-const { user } = Astro.props;
+if (Astro.locals.subject?.properties != undefined) {
+    user = {
+        name: `${Astro.locals.subject?.properties.firstName} ${Astro.locals.subject?.properties.lastName}`
+    }
+}
 ---
+<!-- This code is ran on the frontend -->
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="Main navigation">
     <div class="container-fluid">
@@ -28,7 +30,7 @@ const { user } = Astro.props;
             </ul>
             <!-- Right aligned items -->
             <ul class="navbar-nav ms-auto">
-                {user != undefined ? 
+                {Astro.locals.subject?.properties != undefined ? 
                     <li class="nav-item">
                         <span class="nav-link">Logged in as: {user.name}</span>
                     </li>
@@ -42,9 +44,6 @@ const { user } = Astro.props;
                     // If the user is not logged in, give them the login button
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/signup">Sign Up</a>
                     </li>
                 }
             </ul>
