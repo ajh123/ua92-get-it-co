@@ -4,9 +4,9 @@
  */
 
 import type { APIRoute } from "astro"
-import { deleteTokens } from "../auth"
 
 export const GET: APIRoute = async (ctx) => {
-	deleteTokens(ctx)
+    ctx.cookies.delete("refresh_token")
+    ctx.cookies.delete("access_token")
 	return Response.redirect("/", 302)
 }

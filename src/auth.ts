@@ -30,9 +30,3 @@ export function setTokens(ctx: APIContext, access: string, refresh: string) {
         maxAge: 34560000,
     })
 }
-
-// We need a way to delete the tokens so we can logout.
-export function deleteTokens(ctx: APIContext) {
-    ctx.cookies.delete("refresh_token")
-    ctx.cookies.delete("access_token")
-}
