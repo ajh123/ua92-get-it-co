@@ -1,0 +1,32 @@
+---
+import Layout from "../../components/Layout.astro";
+import { products } from "../../backend/storage/dummy";
+---
+
+<Layout title="Products">
+    <main class="container">
+        <h1>Products</h1>
+        <hr/>
+        <!-- Check if there are products available by checking if the length of keys is greater then 0 -->
+        {Object.keys(products).length > 0  ? 
+            <div class="row">
+                {/* Loop through the products and display them by iterating the keys */}
+                {Object.keys(products).map(function(key, i) {
+                    const product = products[key]; // Retrieve the product by key
+                    return <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
+                        <div class="card h-100 d-flex flex-column">
+                            <img src={product.image} class="card-img-top" alt={product.name}>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{product.name}</h5>
+                                <p class="card-text">Price: ${product.price}</p>
+                                <a href={`/products/${key}`} class="btn btn-primary mt-auto">View product</a>
+                            </div>
+                        </div>
+                    </div>
+                })}
+            </div>
+        : // Else
+            <p>No products are available.</p>
+        }
+    </main>
+</Layout>

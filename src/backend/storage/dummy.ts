@@ -1,4 +1,4 @@
-import type { Products, User } from "./types";
+import type { Products, User } from "../types";
 
 export const products: Products = {
     "bananas": {
@@ -19,7 +19,7 @@ export const products: Products = {
         name: "Chicken",
         description: "Plates not included."
     },
-    "eegs": {
+    "eggs": {
         price: 10,
         image: "https://raw.githubusercontent.com/ajh123/ua92-ecommerce/refs/heads/main/docs/demo/images/eggs.jpg",
         name: "Eggs",

@@ -1,0 +1,43 @@
+---
+import Layout from "../components/Layout.astro"
+---
+
+<Layout title="Profile">
+    <main class="container">
+        <h1>Profile</h1>
+        <hr/>
+        <article>
+            <h2>Cart:</h2>
+            <div id="cart"></div>
+            <a href="#">Proceed to Checkout</a>
+        </article>
+        <article>
+            <h2>Recent orders:</h2>
+            <% if (user.orders.length > 0) { %>
+            <table>
+                <th>Order Number</th>
+                <th>Date</th>
+                <th>Cost (Total)</th>
+                <th>Products</th>
+
+                    <% for (order in user.orders) { %>
+                    <tr>
+                        <td><code><%=order.name%></code></td>
+                        <td><%=order.created_at%></td>
+                        <td><code>$<%=order.total_price%></code></td>
+                        <td>
+                            <ul>
+                                <% for (item in order.orderitem_set.all) { %>
+                                <li><%= item.quantity %> x <a href="/products/<%=item.product.name%>"><%=item.product.name%></a> - $<%= item.total_price %></li>
+                                <% } %>
+                            </ul>
+                        </td>
+                    </tr>
+                    <% } %>
+            </table>
+            <% } else { %>
+                <p>You have not made any orders</p>
+            <% } %>
+        </article>
+    </main>
+</Layout>

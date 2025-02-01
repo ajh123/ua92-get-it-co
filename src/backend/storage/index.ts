@@ -1,5 +1,5 @@
 import { products, users } from "./dummy";
-import type { Product, Products, User } from "./types";
+import type { Product, Products, User } from "../../types";
 
 export function getProductById(id: string): Product {
     return products[id];

@@ -1,0 +1,60 @@
+---
+// This code is ran on the backend
+import Layout from "../../components/Layout.astro"
+
+import { products } from "../../backend/storage/dummy";
+
+// Astro will call this function to understand what valid paths are acceptable for the "id" parameter
+export function getStaticPaths() {
+    // Build a list of paths for all products based of their IDs
+    const result = [];
+    for (const key of Object.keys(products)) { // Products is an object with keys as IDs
+        result.push({ params: { id: key } });
+    }
+
+    return result;
+}
+
+const { id } = Astro.params;
+const product = products[id];
+---
+<!-- This code is ran on the frontend -->
+
+<Layout title={product.name}> <!-- Pass the product name as the title -->
+    <script define:vars={{ id }}> // Pass the id variable to the frontend
+        window.id = `${id}`;
+    </script>
+
+    <main class="container">
+        <h1>{product.name}</h1> <!-- Retrieve the name of the product -->
+        <hr/>
+        <div class="d-flex gap-3 align-items-start"> <!-- Flex container with items aligned to the top -->
+            <div class="card" style="width: 18rem;">
+                <img src={product.image} class="card-img-top" alt={product.name}>
+                <div class="card-body">
+                    <h5 class="card-title">{product.name}</h5>
+                    <div class="card-text">
+                        <p>Price: ${product.price}</p>
+                        <hr/>
+                        <p>{product.description}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <form class="row g-3" onsubmit="submitItem(window.id); return false;">
+                        <div class="col-auto">
+                            <label for="quantity" class="visually-hidden">Quantity</label>
+                            <input type="number" class="form-control-text" id="quantity" value="1" min="1">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3">Add to cart</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <a href="/products/">All products</a>
+    </main>
+</Layout>
