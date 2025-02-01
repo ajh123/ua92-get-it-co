@@ -6,7 +6,12 @@
 import type { APIRoute } from "astro"
 
 export const GET: APIRoute = async (ctx) => {
-    ctx.cookies.delete("refresh_token")
-    ctx.cookies.delete("access_token")
-	return Response.redirect("/", 302)
+    const headers = new Headers()
+
+    headers.append("Set-Cookie", "refresh_token=; Path=/; HttpOnly; Secure; SameSite=Lax; Expires=Thu, 01 Jan 1970 00:00:00 GMT")
+    headers.append("Set-Cookie", "access_token=; Path=/; HttpOnly; Secure; SameSite=Lax; Expires=Thu, 01 Jan 1970 00:00:00 GMT")
+
+    headers.set("Location", "/")
+
+    return new Response(null, { status: 302, headers })
 }
