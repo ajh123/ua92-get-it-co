@@ -4,6 +4,13 @@ import Layout from "../components/Layout.astro"
 
 <Layout title="Home">
     <main>
+        <!--
+        Create a bootstrap section for the main page's "hero" at the top
+        this will create a column that is centred including:
+        - company title at top "Get It Co"
+        - description of company
+        - and two buttons (known as "call to actions"), one will redirect to login, and the other to products
+        -->
         <section class="py-5 text-center container">
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
@@ -16,6 +23,15 @@ import Layout from "../components/Layout.astro"
                 </div>
             </div>
         </section>
+        <!--
+        Create another bootstrap section, this will have a slight gray background so
+        content is separated from the hero. This section will include two columns.
+
+        The first column includes a heading and a paragraph and the second includes
+        an `iframe` which displays a map of the city of Samchezter.
+
+        The map column is the right most column and it is smaller then the left one.
+        -->
         <section class="py-5 bg-body-tertiary">
             <div class="container">
                 <div class="row">
@@ -29,5 +45,74 @@ import Layout from "../components/Layout.astro"
                 </div>
             </div>
         </section>
+        <!-- Create a final bootstrap section with a contact us form -->
+        <section class="py-5 bg-body">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <!--
+                Create the form but with `novalidate` - this will prevent the browser's
+                default validation and allow bootstrap to take over.
+                -->
+                <form id="contactUsForm" novalidate>
+                    <div class="mb-3">
+                        <!--
+                        Create the following:
+                        - a label for the input with `for` being set to the same ID as the input
+                        - an email input box marked as required
+                        - a div with the bootstrap class "valid-feedback" - this will only appear if the input is valid
+                        - a div with the bootstrap class "invalid-feedback" - this will only appear if the input is invalid
+                        -->
+                        <label for="contactEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="contactEmail" placeholder="name@example.com" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <!--
+                    Create the following:
+                    - a label for the input with `for` being set to the same ID as the input
+                    - a textarea input box marked as required use for multiple lines of text
+                    - a div with the bootstrap class "valid-feedback" - this will only appear if the input is valid
+                    - a div with the bootstrap class "invalid-feedback" - this will only appear if the input is invalid
+                    -->
+                    <div class="mb-3">
+                        <label for="contactMessage" class="form-label">Message</label>
+                        <textarea class="form-control" id="contactMessage" rows="3" required></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <!-- And finally a submit button -->
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </section>
     </main>
+
+    <!--
+    Create a JS script which:
+    - listens for the contact form to be submitted
+    - disable default actions
+    - ask bootstrap to perform validation
+    - apply visual feedback
+    - finally if successful send the contact somewhere (in this case alert to the user this is not possible)
+    -->
+    <script>
+        document.getElementById('contactUsForm').addEventListener('submit', function (event) {
+            event.preventDefault();  // Prevent form submission to handle validation manually
+
+            // Bootstrap form validation
+            if (this.checkValidity() === false) {
+                event.stopPropagation();  // Stop the default behaviour if invalid
+            }
+
+            this.classList.add('was-validated');  // Add the 'was-validated' class for Bootstrap's visual feedback
+
+            if (this.checkValidity() === true) {
+                alert('Sorry we are unable to process your message right now, please try again later.')
+            }
+        });
+    </script>
 </Layout>
