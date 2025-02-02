@@ -214,7 +214,7 @@ export async function renderCart() {
  * @returns {Promise<object|undefined>} Returns the item's properties.
  */
 export async function getItemProperties(item) {
-    const items = await (await fetch("/api/v1/getProducts")).json();
+    const items = await (await fetch("/api/v1/products.json")).json();
     return items[item];
 }
 

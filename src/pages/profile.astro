@@ -6,7 +6,33 @@ import Layout from "../components/Layout.astro"
     <main class="container">
         <h1>Profile</h1>
         <hr/>
-        <article>
+        <article class="mb-3">
+            <form>
+                <fieldset disabled>
+                    <legend><h2>Your details:</h2></legend>
+                    <div class="mb-3">
+                        <label for="disabledTextInput" class="form-label">User ID</label>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder={Astro.locals.subject?.properties.id}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="disabledTextInput" class="form-label">First Name</label>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder={Astro.locals.subject?.properties.firstName}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="disabledTextInput" class="form-label">Last Name</label>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder={Astro.locals.subject?.properties.lastName}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="disabledTextInput" class="form-label">Email</label>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder={Astro.locals.subject?.properties.email}>
+                    </div>
+                    <div class="form-text">
+                        These details are bound to your Miners Online account, Get It Co cannot change them.
+                    </div>
+                </fieldset>
+            </form>
+        </article>
+        <article class="mb-3">
             <h2>Cart:</h2>
             <div id="cart"></div>
             <a href="#">Proceed to Checkout</a>
