@@ -1,5 +1,10 @@
 ---
 import Layout from "../components/Layout.astro"
+
+import { getUser } from "../middleware";
+
+// Fetch the current user by using the access token cookie sent by the browser.
+const user = await getUser(Astro.cookies.get("access_token").value);
 ---
 
 <Layout title="Profile">
@@ -12,19 +17,19 @@ import Layout from "../components/Layout.astro"
                     <legend><h2>Your details:</h2></legend>
                     <div class="mb-3">
                         <label for="disabledTextInput" class="form-label">User ID</label>
-                        <input type="text" id="disabledTextInput" class="form-control" placeholder={Astro.locals.subject?.properties.id}>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder={user.id}>
                     </div>
                     <div class="mb-3">
                         <label for="disabledTextInput" class="form-label">First Name</label>
-                        <input type="text" id="disabledTextInput" class="form-control" placeholder={Astro.locals.subject?.properties.firstName}>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder={user.firstName}>
                     </div>
                     <div class="mb-3">
                         <label for="disabledTextInput" class="form-label">Last Name</label>
-                        <input type="text" id="disabledTextInput" class="form-control" placeholder={Astro.locals.subject?.properties.lastName}>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder={user.lastName}>
                     </div>
                     <div class="mb-3">
                         <label for="disabledTextInput" class="form-label">Email</label>
-                        <input type="text" id="disabledTextInput" class="form-control" placeholder={Astro.locals.subject?.properties.email}>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder={user.email}>
                     </div>
                     <div class="form-text">
                         These details are bound to your Miners Online account, Get It Co cannot change them.

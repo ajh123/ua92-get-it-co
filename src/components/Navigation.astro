@@ -1,12 +1,9 @@
 ---
 // This code is ran on the backend
-let user = undefined;
+import { getUser } from "../middleware";
 
-if (Astro.locals.subject?.properties != undefined) {
-    user = {
-        name: `${Astro.locals.subject?.properties.firstName} ${Astro.locals.subject?.properties.lastName}`
-    }
-}
+// Fetch the current user by using the access token cookie sent by the browser.
+const user = await getUser(Astro.cookies.get("access_token").value);
 ---
 <!-- This code is ran on the frontend -->
 
@@ -30,9 +27,9 @@ if (Astro.locals.subject?.properties != undefined) {
             </ul>
             <!-- Right aligned items -->
             <ul class="navbar-nav ms-auto">
-                {Astro.locals.subject?.properties != undefined ? 
+                {user != undefined ? 
                     <li class="nav-item">
-                        <span class="nav-link">Logged in as: {user.name}</span>
+                        <span class="nav-link">Logged in as: {user.firstName} {user.lastName}</span>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Logout</a>

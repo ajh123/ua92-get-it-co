@@ -8,7 +8,7 @@
  */
 
 import { defineMiddleware } from "astro:middleware"
-import { subjects } from "./subjects"
+import { subjects, type User } from "./subjects"
 import { client, setTokens } from "./auth"
 
 export const onRequest = defineMiddleware(async (ctx, next) => {
@@ -37,6 +37,8 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
 					setTokens(ctx, verified.tokens.access, verified.tokens.refresh)
 				ctx.locals.subject = verified.subject
 				return next()
+			} else {
+				console.error(verified.err)
 			}
 		}
 	} catch (e) {
@@ -53,3 +55,38 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
 	}
 	return next()
 })
+
+
+/**
+ * This function will use an access token and use it to fetch user information from
+ * the authentication provider.
+ * 
+ * The authentication provider will return the user information or `undefined` in a
+ * JSON response.
+ * 
+ * @param access The access token required to access the API 
+ * @returns The user data or `undefined`
+ */
+export async function getUser(access: string): Promise<User|undefined> {
+	// Return nothing if the access token is empty
+	if (access == undefined) {
+		return undefined;
+	}
+
+	// Make a request to the authentication provider and pass the access token in the headers.
+	const response = await fetch("https://authserver.minersonline.uk/userinfo", {
+		headers: { Authorization: `Bearer ${access}` },
+	})
+
+	// Read the response from the request
+	const body = (await response.text());
+
+	// Convert into a JS object with JSON
+	const data = JSON.parse(body);
+
+	if (data == undefined) {
+		return undefined;
+	}
+
+	return data as User;
+}
