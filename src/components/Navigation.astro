@@ -3,7 +3,7 @@
 import { getUser } from "../middleware";
 
 // Fetch the current user by using the access token cookie sent by the browser.
-const user = await getUser(Astro.cookies.get("access_token").value);
+const user = await getUser(Astro.cookies);
 ---
 <!-- This code is ran on the frontend -->
 

@@ -10,6 +10,7 @@
 import { defineMiddleware } from "astro:middleware"
 import { subjects, type User } from "./subjects"
 import { client, setTokens } from "./auth"
+import type { AstroCookies } from "astro"
 
 export const onRequest = defineMiddleware(async (ctx, next) => {
 	// Authentication callbacks must be automatically handled since the user is not logged in yet
@@ -64,14 +65,16 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
  * The authentication provider will return the user information or `undefined` in a
  * JSON response.
  * 
- * @param access The access token required to access the API 
+ * @param cookies The cookies that are part of the user's request.
  * @returns The user data or `undefined`
  */
-export async function getUser(access: string): Promise<User|undefined> {
+export async function getUser(cookies: AstroCookies): Promise<User|undefined> {
 	// Return nothing if the access token is empty
-	if (access == undefined) {
+	if (!cookies.has("access_token")) {
 		return undefined;
 	}
+
+	const access = cookies.get("access_token").value;
 
 	// Make a request to the authentication provider and pass the access token in the headers.
 	const response = await fetch("https://authserver.minersonline.uk/userinfo", {
