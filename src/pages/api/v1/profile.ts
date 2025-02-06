@@ -21,5 +21,6 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     });
 
     // Return the user back to their profile
-    return Response.redirect("/profile", 301)
+    
+    return Response.redirect(`${(new URL(request.url)).origin}/profile`, 301)
 };
