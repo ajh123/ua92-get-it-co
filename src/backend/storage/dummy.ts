@@ -1,4 +1,4 @@
-import type { Products, User } from "../types";
+import type { Products } from "../types";
 
 export const products: Products = {
     "bananas": {
@@ -26,12 +26,3 @@ export const products: Products = {
         description: "Broken eggs or basket not included."
     }
 }
-
-export const users: User[] = [
-    {
-        email: "bob@example.com",
-        name: "Bob",
-        orders: [],
-        password: "secretKey"
-    }
-]
