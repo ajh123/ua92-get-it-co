@@ -29,7 +29,7 @@ const product = products[id];
         <h1>{product.name}</h1> <!-- Retrieve the name of the product -->
         <hr/>
         <div class="d-flex gap-3 align-items-start"> <!-- Flex container with items aligned to the top -->
-            <div class="card" style="width: 18rem;">
+            <div class="proudct_card">
                 <img src={product.image} class="card-img-top" alt={product.name}>
                 <div class="card-body">
                     <h5 class="card-title">{product.name}</h5>
@@ -40,7 +40,7 @@ const product = products[id];
                     </div>
                 </div>
             </div>
-            <div class="card" style="width: 18rem;">
+            <div class="proudct_card">
                 <div class="card-body">
                     <form class="row g-3" onsubmit="submitItem(window.id); return false;">
                         <div class="col-auto">

@@ -104,13 +104,13 @@ import Layout from "../components/Layout.astro"
             event.preventDefault();  // Prevent form submission to handle validation manually
 
             // Bootstrap form validation
-            if (this.checkValidity() === false) {
+            if (this.checkValidity() === false) { // The IDE may show an error here - but checkValidity is a function from Bootstrap and is not part of Vanilla JS.
                 event.stopPropagation();  // Stop the default behaviour if invalid
             }
 
             this.classList.add('was-validated');  // Add the 'was-validated' class for Bootstrap's visual feedback
 
-            if (this.checkValidity() === true) {
+            if (this.checkValidity() === true) { // The IDE may show an error here - but checkValidity is a function from Bootstrap and is not part of Vanilla JS.
                 alert('Sorry we are unable to process your message right now, please try again later.')
             }
         });
