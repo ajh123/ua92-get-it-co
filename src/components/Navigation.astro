@@ -37,6 +37,9 @@ const user = await getUser(Astro.cookies);
                     <li class="nav-item">
                         <a class="nav-link" href="/profile">Profile</a>
                     </li> 
+                    <li class="nav-item">
+                        <a id="nav-cart" class="nav-link bg-secondary text-light" href="/cart">Cart $0 (0 items)</a>
+                    </li> 
                 : // Else
                     // If the user is not logged in, give them the login button
                     <li class="nav-item">

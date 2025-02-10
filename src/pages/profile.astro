@@ -11,36 +11,28 @@ const user = await getUser(Astro.cookies);
     <main class="container">
         <h1>Profile</h1>
         <hr/>
-        <article class="mb-3">
-            <form action="/api/v1/profile" method="post">
-                <legend><h2>Your details:</h2></legend>
-                <div class="mb-3">
-                    <label for="userID" class="form-label">User ID</label>
-                    <input disabled type="text" id="userID" class="form-control" value={user.id}>
-                </div>
-                <div class="mb-3">
-                    <label for="userEmail" class="form-label">Email</label>
-                    <input disabled type="text" id="userEmail" class="form-control" value={user.email}>
-                </div>
-                <div class="mb-3">
-                    <label for="userFirstName" class="form-label">First Name</label>
-                    <input type="text" id="userFirstName" class="form-control" name="firstName" value={user.firstName}>
-                </div>
-                <div class="mb-3">
-                    <label for="userLastName" class="form-label">Last Name</label>
-                    <input type="text" id="userLastName" class="form-control" name="lastName" value={user.lastName}>
-                </div>
-                <div class="form-text">
-                    These details are bound to your Miners Online account, only some details can be changed.
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </article>
-        <article class="mb-3">
-            <h2>Cart:</h2>
-            <div id="cart"></div>
-            <a href="#">Proceed to Checkout</a>
-        </article>
+        <form action="/api/v1/profile" method="post">
+            <div class="mb-3">
+                <label for="userID" class="form-label">User ID</label>
+                <input disabled type="text" id="userID" class="form-control" value={user.id}>
+            </div>
+            <div class="mb-3">
+                <label for="userEmail" class="form-label">Email</label>
+                <input disabled type="text" id="userEmail" class="form-control" value={user.email}>
+            </div>
+            <div class="mb-3">
+                <label for="userFirstName" class="form-label">First Name</label>
+                <input type="text" id="userFirstName" class="form-control" name="firstName" value={user.firstName}>
+            </div>
+            <div class="mb-3">
+                <label for="userLastName" class="form-label">Last Name</label>
+                <input type="text" id="userLastName" class="form-control" name="lastName" value={user.lastName}>
+            </div>
+            <div class="form-text">
+                These details are bound to your Miners Online account, only some details can be changed.
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
         <!-- <article>
             <h2>Recent orders:</h2>
             <% if (user.orders.length > 0) { %>

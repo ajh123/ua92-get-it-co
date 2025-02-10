@@ -47,8 +47,9 @@ const product = products[id];
                             <label for="quantity" class="visually-hidden">Quantity</label>
                             <input type="number" class="form-control-text" id="quantity" value="1" min="1">
                         </div>
-                        <div class="col-auto">
+                        <div class="col-auto was-validated">
                             <button type="submit" class="btn btn-primary mb-3">Add to cart</button>
+                            <div class="valid-feedback" id="submitFeedback"></div>
                         </div>
                     </form>
                 </div>

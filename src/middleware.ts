@@ -47,7 +47,7 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
 	}
 
 	// Only force authentication if we are trying to access the profile page.
-	if (ctx.routePattern === "/profile") {
+	if (ctx.routePattern === "/profile" || ctx.routePattern === "/cart") {
 		const { url } = await client.authorize(
 			new URL(ctx.request.url).origin + "/callback",
 			"code",

@@ -1,0 +1,17 @@
+---
+import Layout from "../components/Layout.astro"
+
+import { getUser } from "../middleware";
+
+// Fetch the current user by using the access token cookie sent by the browser.
+const user = await getUser(Astro.cookies);
+---
+
+<Layout title="Cart">
+    <main class="container">
+        <h1>Cart</h1>
+        <hr/>
+        <div id="cart"></div>
+        <a href="#">Proceed to Checkout</a>
+    </main>
+</Layout>

@@ -20,6 +20,8 @@ export function setItem(name, quantity) {
     // Convert the updated cart object back to a JSON string and store it in the
     // browser's local storage
     localStorage.setItem("cart", JSON.stringify(cart));
+
+    renderNavCart();
 }
 
 
@@ -64,6 +66,8 @@ export function removeItem(name) {
     // Convert the updated cart object back to a JSON string and store it in the
     // browser's local storage
     localStorage.setItem("cart", JSON.stringify(cart));
+
+    renderNavCart();
 }
 
 /**
@@ -207,6 +211,42 @@ export async function renderCart() {
 }
 
 /**
+ * Updates an element with the ID `"nav-cart"` to contain the total of all items in the cart.
+ */
+export async function renderNavCart() {
+    let ele = document.getElementById("nav-cart")
+    let cart = getItems(); // Get the all items in the cart
+
+    let table = ``;
+
+    // Initialise all totals to 0
+    let totalItems = 0;
+    let totalCost = 0;
+
+    // Iterate through all items in the cart
+    for (let id in cart) {
+        let quantity = cart[id]; // Get the item quantity
+        let item = await getItemProperties(id); // Get item
+        totalItems += quantity; // Append to to total
+
+        totalCost += item.price * quantity; // ^^^
+    }
+
+    if (Object.keys(cart).length == 0) {
+        table = "Cart $0 (0 items)";
+        ele.classList.remove("bg-success")
+        ele.classList.add("bg-secondary")
+    } else {
+        table = `Cart $${totalCost} (${totalItems} items)`
+        ele.classList.add("bg-success")
+        ele.classList.remove("bg-secondary")
+    }
+
+    // Overwrite an HTML element with ID of "cart" to contain the new table
+    ele.innerHTML = table;
+}
+
+/**
  * Fetches and item price from, the backend who's keys represent 
  * item names and values represent all item properties.
  * 
@@ -242,7 +282,7 @@ export function submitItem(item) {
         // We then put the item into the cart
         setItem(item, currQuant + quantity);
         // And alert to the user this operation was successful
-        alert(`${quantity} X ${item} added to cart.`)
+        document.getElementById("submitFeedback").innerText = `${quantity} X ${item} added to cart.`;
     }
 }
 
@@ -255,3 +295,4 @@ window.getItems = getItems;
 window.renderCart = renderCart;
 window.getItemProperties = getItemProperties;
 window.submitItem = submitItem;
+window.renderNavCart = renderNavCart;
