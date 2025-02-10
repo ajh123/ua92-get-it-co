@@ -33,14 +33,14 @@ import Layout from "../components/Layout.astro"
         The map column is the right most column and it is smaller then the left one.
         -->
         <section class="py-5 bg-body-tertiary">
-            <div class="container">
-                <div class="row">
-                    <div class="col-8">
+            <div class="container" style="height: 200px;">
+                <div class="row" style="height: 100%;">
+                    <div class="col-6">
                         <h2>Location</h2>
                         <p>We are located right in the heart of Samchezter.</p>
                     </div>
-                    <div class="col-4">
-                        <iframe width="100" src="https://maps.minersonline.uk"></iframe>
+                    <div class="col-6" style="height: 100%;">
+                        <iframe width="100" class="map" src="https://maps.minersonline.uk/#minecraft_overworld;flat;-356,64,-842;4"></iframe>
                     </div>
                 </div>
             </div>
