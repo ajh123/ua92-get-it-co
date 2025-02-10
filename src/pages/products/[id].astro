@@ -4,16 +4,7 @@ import Layout from "../../components/Layout.astro"
 
 import { products } from "../../backend/storage/dummy";
 
-// Astro will call this function to understand what valid paths are acceptable for the "id" parameter
-export function getStaticPaths() {
-    // Build a list of paths for all products based of their IDs
-    const result = [];
-    for (const key of Object.keys(products)) { // Products is an object with keys as IDs
-        result.push({ params: { id: key } });
-    }
-
-    return result;
-}
+export const prerender = false;
 
 const { id } = Astro.params;
 const product = products[id];
@@ -25,37 +16,59 @@ const product = products[id];
         window.id = `${id}`;
     </script>
 
-    <main class="container">
-        <h1>{product.name}</h1> <!-- Retrieve the name of the product -->
-        <hr/>
-        <div class="d-flex gap-3 align-items-start"> <!-- Flex container with items aligned to the top -->
-            <div class="proudct_card">
-                <img src={product.image} class="card-img-top" alt={product.name}>
-                <div class="card-body">
-                    <h5 class="card-title">{product.name}</h5>
-                    <div class="card-text">
-                        <p>Price: ${product.price}</p>
-                        <hr/>
+    <main>
+        <section class="py-5 bg-body">
+            <div class="container">
+                <div><a href="/products">Products</a> &gt; <a href={`/products/${id}`}>{product.name}</a></div>
+                <div class="row py-3" style="height: 100%;">
+                    <div class="col-3">
+                        <img src={product.image} class="card-img-top" alt={product.name}>
+                    </div>
+                    <div class="col-9" style="height: 100%;">
+                        <h1 class="card-title">{product.name}</h1>
                         <p>{product.description}</p>
+                        <p style="font-weight: bold;">Price: ${product.price}</p>
+
+                        <div class="row g-2">
+                            <form class="row g-3" onsubmit="submitItem(window.id); return false;">
+                                <div style="width: 200px;">
+                                    <div class="form-floating">
+                                        <label for="quantity" class="visually-hidden">Quantity</label>
+                                        <input type="number" class="form-control-text" id="quantity" value="1" min="1">
+                                    </div>
+                                </div>
+                                <div style="width: 130px;">
+                                    <div class="form-floating">
+                                        <div class="col-auto was-validated">
+                                            <button type="submit" class="btn btn-primary mb-3">Add to cart</button>
+                                            <div class="valid-feedback" id="submitFeedback"></div>
+                                        </div>                                 
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="proudct_card">
-                <div class="card-body">
-                    <form class="row g-3" onsubmit="submitItem(window.id); return false;">
-                        <div class="col-auto">
-                            <label for="quantity" class="visually-hidden">Quantity</label>
-                            <input type="number" class="form-control-text" id="quantity" value="1" min="1">
-                        </div>
-                        <div class="col-auto was-validated">
-                            <button type="submit" class="btn btn-primary mb-3">Add to cart</button>
-                            <div class="valid-feedback" id="submitFeedback"></div>
-                        </div>
-                    </form>
+        </section>
+        <section class="row my-5">
+            <div class="col-8">
+                <div class="py-5 bg-body">
+                    <div class="container">
+                        <h3>Product Description</h3>
+                        <p>{product.description}</p>
+                        <p>{product.longDescription}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <hr/>
-        <a href="/products/">All products</a>
+            <div class="col-4">
+                <div class="py-5 bg-body">
+                    <div class="container">
+                        <h3>Important information</h3>
+                        <p>Alcohol pricing & promotions for customers served from outside Samland may differ from those shown when browsing our site. Please log in to see the full range of alcohol prices & promotions available to you.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 </Layout>
