@@ -33,15 +33,28 @@ import Layout from "../components/Layout.astro"
         The map column is the right most column and it is smaller then the left one.
         -->
         <section class="py-5 bg-body-tertiary">
-            <div class="container" style="height: 200px;">
-                <div class="row" style="height: 100%;">
-                    <div class="col-6">
-                        <h2>Location</h2>
-                        <p>We are located right in the heart of Samchezter.</p>
+            <div class="container" >
+                <h2>About Us</h2>
+                <div style="height: 200px;">
+                    <div class="row" style="height: 100%;">
+                        <div class="col-6">
+                            <h3>Location</h3>
+                            <p>We have many stores across the all towns in the city of Samchester.</p>
+                            <ul>
+                                <li>Riverside Grove</li>
+                                <li>Peakton</li>
+                                <li>Samchester (Downtown)</li>
+                            </ul>
+                        </div>
+                        <div class="col-6" style="height: 100%;">
+                            <iframe width="100" class="map" src="https://maps.minersonline.uk/#minecraft_overworld;flat;-356,64,-842;4"></iframe>
+                        </div>
                     </div>
-                    <div class="col-6" style="height: 100%;">
-                        <iframe width="100" class="map" src="https://maps.minersonline.uk/#minecraft_overworld;flat;-356,64,-842;4"></iframe>
-                    </div>
+                </div>
+                <div class="container py-5">
+                    <h3>Our services</h3>
+                    <p>We provide the cheapeast grocies for all residents of Samchezter we are used by 10,000 people daily.</p>
+                    <p>We keep a stock of a small number of products.</p>
                 </div>
             </div>
         </section>
