@@ -1,5 +1,8 @@
 # get_it_co
 
+> [!IMPORTANT]
+> You need to have [Bun](https://bun.sh) installed
+
 To install dependencies:
 
 ```bash
